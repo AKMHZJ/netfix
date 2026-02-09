@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Profile: {{ profile_user.username }}</h2>
+<p>Email: {{ profile_user.email }}</p>
+
+{% if is_customer %}
+    <p>Role: Customer</p>
+    <p>Date of Birth: {{ customer.birth_date }}</p>
+
+    {% if request.user == profile_user %}
+        <h3>Requested Services History</h3>
+        {% if requests %}
+            <ul>
+            {% for req in requests %}
+                <li class="service-card">
+                    <strong>{{ req.service.name }}</strong> ({{ req.service.field }})<br>
+                    Provided by: <a href="{% url 'profile' %}?user={{ req.service.company.user.username }}">{{ req.service.company.user.username }}</a><br>
+                    Address: {{ req.address }}<br>
+                    Date Requested: {{ req.requested_at|date:"M d, Y" }}<br>
+                    Cost: ${{ req.cost }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No services requested yet.</p>
+        {% endif %}
+    {% endif %}
+
+{% elif is_company %}
+    <p>Role: Company</p>
+    <p>Field of Work: {{ company.field }}</p>
+
+    <h3>Services Provided</h3>
+    {% if request.user == profile_user %}
+        <p><a href="{% url 'create_service' %}" class="button">Create New Service</a></p>
+    {% endif %}
+    
+    {% if services %}
+        <ul>
+        {% for service in services %}
+            <li class="service-card">
+                <strong><a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a></strong><br>
+                Field: {{ service.field }}<br>
+                Price: ${{ service.price_per_hour }}/hr<br>
+                Created: {{ service.created|date:"M d, Y" }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No services created yet.</p>
+    {% endif %}
+
+{% endif %}
+
+{% endblock %}

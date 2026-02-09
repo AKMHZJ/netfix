@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to Netfix</h1>
+<p>Fix your bidet, paint your walls, and more!</p>
+
+<div class="categories">
+    <h3>Browse by Category</h3>
+    <ul>
+        <li><a href="{% url 'services_by_category' 'Air Conditioner' %}">Air Conditioner</a></li>
+        <li><a href="{% url 'services_by_category' 'Carpentry' %}">Carpentry</a></li>
+        <li><a href="{% url 'services_by_category' 'Electricity' %}">Electricity</a></li>
+        <li><a href="{% url 'services_by_category' 'Gardening' %}">Gardening</a></li>
+        <li><a href="{% url 'services_by_category' 'Home Machines' %}">Home Machines</a></li>
+        <li><a href="{% url 'services_by_category' 'Housekeeping' %}">Housekeeping</a></li>
+        <li><a href="{% url 'services_by_category' 'Interior Design' %}">Interior Design</a></li>
+        <li><a href="{% url 'services_by_category' 'Locks' %}">Locks</a></li>
+        <li><a href="{% url 'services_by_category' 'Painting' %}">Painting</a></li>
+        <li><a href="{% url 'services_by_category' 'Plumbing' %}">Plumbing</a></li>
+        <li><a href="{% url 'services_by_category' 'Water Heaters' %}">Water Heaters</a></li>
+    </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Request Service: {{ service.name }}</h2>
+<p>Price: ${{ service.price_per_hour }}/hr</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Confirm Request</button>
+</form>
+{% endblock %}

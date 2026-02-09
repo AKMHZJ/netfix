@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>All Services</h2>
+{% for service in services %}
+    <div class="service-card">
+        <h3><a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a></h3>
+        <p>Field: {{ service.field }}</p>
+        <p>Company: <a href="{% url 'profile' %}?user={{ service.company.user.username }}">{{ service.company.user.username }}</a></p>
+        <p>Price: ${{ service.price_per_hour }}/hr</p>
+        <p>Created: {{ service.created }}</p>
+    </div>
+{% empty %}
+    <p>No services available.</p>
+{% endfor %}
+
+{% if is_paginated %}
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+{% endif %}
+{% endblock %}

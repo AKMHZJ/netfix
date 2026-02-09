@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Most Requested Services</h2>
+{% for service in services %}
+    <div class="service-card">
+        <h3><a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a></h3>
+        <p>Requests: {{ service.num_requests }}</p>
+        <p>Field: {{ service.field }}</p>
+        <p>Company: <a href="{% url 'profile' %}?user={{ service.company.user.username }}">{{ service.company.user.username }}</a></p>
+        <p>Price: ${{ service.price_per_hour }}/hr</p>
+    </div>
+{% empty %}
+    <p>No services found.</p>
+{% endfor %}
+{% endblock %}
