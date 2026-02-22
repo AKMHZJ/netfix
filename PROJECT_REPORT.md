@@ -29,9 +29,17 @@ Netfix is a service marketplace web application where companies can offer servic
 - **Class-Based Views**: Used `CreateView`, `ListView`, `DetailView`, `TemplateView` for cleaner code structure.
 - **Context Data**: customized `get_context_data` to pass dynamic information (like aggregation for most requested services).
 
-### 5. Templates
+### 5. Templates & Navigation
 - **Inheritance**: Used `base.html` for a consistent layout (navigation, styling).
 - **Template Tags**: Used `{% url %}`, `{% if %}`, `{% for %}` for dynamic content rendering.
+- **Improved Navigation**: Added direct links to service categories from service listings and details, enhancing discoverability.
+
+### 6. Testing
+- **Automated Tests**: Added `services/tests.py` to verify critical business logic:
+    - Customer registration flow.
+    - Company service creation restrictions (e.g., Plumbers can only create Plumbing services).
+    - "All in One" company privileges.
+    - Service request cost calculation.
 
 ## How to Run
 1. **Install Dependencies**:
@@ -42,11 +50,15 @@ Netfix is a service marketplace web application where companies can offer servic
    ```bash
    python3 manage.py migrate
    ```
-3. **Run Server**:
+3. **Run Tests**:
+   ```bash
+   python3 manage.py test services.tests
+   ```
+4. **Run Server**:
    ```bash
    python3 manage.py runserver
    ```
-4. **Access**: Open `http://127.0.0.1:8000/` in your browser.
+5. **Access**: Open `http://127.0.0.1:8000/` in your browser.
 
 ## Features
 - **User Roles**: Separate registration for Companies and Customers.

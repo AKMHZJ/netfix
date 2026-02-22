@@ -14,7 +14,7 @@
             <ul>
             {% for req in requests %}
                 <li class="service-card">
-                    <strong>{{ req.service.name }}</strong> ({{ req.service.field }})<br>
+                    <strong><a href="{% url 'service_detail' req.service.pk %}">{{ req.service.name }}</a></strong> (<a href="{% url 'services_by_category' req.service.field %}">{{ req.service.field }}</a>)<br>
                     Provided by: <a href="{% url 'profile' %}?user={{ req.service.company.user.username }}">{{ req.service.company.user.username }}</a><br>
                     Address: {{ req.address }}<br>
                     Date Requested: {{ req.requested_at|date:"M d, Y" }}<br>
@@ -41,7 +41,7 @@
         {% for service in services %}
             <li class="service-card">
                 <strong><a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a></strong><br>
-                Field: {{ service.field }}<br>
+                Field: <a href="{% url 'services_by_category' service.field %}">{{ service.field }}</a><br>
                 Price: ${{ service.price_per_hour }}/hr<br>
                 Created: {{ service.created|date:"M d, Y" }}
             </li>

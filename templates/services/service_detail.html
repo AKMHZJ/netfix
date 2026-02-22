@@ -2,7 +2,7 @@
 
 {% block content %}
 <h2>{{ service.name }}</h2>
-<p><strong>Category:</strong> {{ service.field }}</p>
+<p><strong>Category:</strong> <a href="{% url 'services_by_category' service.field %}">{{ service.field }}</a></p>
 <p><strong>Price:</strong> ${{ service.price_per_hour }}/hr</p>
 <p><strong>Description:</strong></p>
 <p>{{ service.description }}</p>

@@ -5,7 +5,7 @@
 {% for service in services %}
     <div class="service-card">
         <h3><a href="{% url 'service_detail' service.pk %}">{{ service.name }}</a></h3>
-        <p>Field: {{ service.field }}</p>
+        <p>Field: <a href="{% url 'services_by_category' service.field %}">{{ service.field }}</a></p>
         <p>Company: <a href="{% url 'profile' %}?user={{ service.company.user.username }}">{{ service.company.user.username }}</a></p>
         <p>Price: ${{ service.price_per_hour }}/hr</p>
         <p>Created: {{ service.created }}</p>
